@@ -28,7 +28,7 @@ public class Calculadora {
              PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM suma;")) {
 
             System.out.println("CONSULTA ====> " + preparedStatement.toString());
-            try (ResultSet rs = preparedStatement.executeQuery()) { // Manejo de ResultSet
+            try (ResultSet rs = preparedStatement.executeQuery()) {
                 while (rs.next()) {
                     System.out.println("ID : " + rs.getInt("id") + ", NUMERO EN BD = " + rs.getInt("numero"));
                     numBD = rs.getInt("numero");
