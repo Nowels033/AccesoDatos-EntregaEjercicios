@@ -1,22 +1,17 @@
-package ejercicioJSON.io;
+package ejercicioJSON.input;
 
 
+import ejercicioJSON.exceptions.ReadJsonException;
 import ejercicioJSON.interfaces.Input;
 
 import java.io.*;
 
 public class ReadJson implements Input {
-    private static final String ruta = "src/main/java/ejercicioJSON/filesJson/";
+    private static final String RUTA = "src/main/java/ejercicioJSON/filesJson/";
     private String rutaCompleta;
     public ReadJson(String archivo) {
-        if (comprobarFichero(archivo)){
-            this.rutaCompleta= ruta+ archivo;
-        }
-
-        else{
-            this.rutaCompleta=null;
-        }
-
+        if (!comprobarFichero(archivo)) throw new ReadJsonException("El archivo introducido no existe");
+        this.rutaCompleta= RUTA+ archivo;
     }
 
     public String getRutaCompleta() {
@@ -44,13 +39,8 @@ public class ReadJson implements Input {
         }
     }
     public static Boolean comprobarFichero(String archivo){
-        File fichero = new File(ruta+archivo);
-
-        if (!fichero.exists()){
-            System.out.println("Fichero: "+archivo+", no se encuentra en el directorio : "+ruta);
-            return false;
-        }
-        return true;
+        File fichero = new File(RUTA+archivo);
+        return fichero.exists();
 
     }
 }

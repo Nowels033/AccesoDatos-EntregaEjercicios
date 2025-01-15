@@ -1,7 +1,6 @@
 package ejercicioJSON.repository;
 
 import ejercicioJSON.interfaces.Output;
-import ejercicioJSON.interfaces.SentenciasSql;
 import ejercicioJSON.model.Persona;
 
 import java.io.FileInputStream;
@@ -9,7 +8,15 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
-public class SqlPersona implements Output, SentenciasSql {
+public class SqlPersona implements Output {
+
+    private static final String SQL_COMPROBAR_TABLA = "CREATE TABLE IF NOT EXISTS personas (" +
+            "id INT AUTO_INCREMENT PRIMARY KEY, " +
+            "nombre VARCHAR(50), " +
+            "edad INT, " +
+            "ciudad VARCHAR(50)" +
+            ");";
+
     private static String url;
     private static String user;
     private static String password;
@@ -59,7 +66,7 @@ public class SqlPersona implements Output, SentenciasSql {
 
     @Override
     public void write() {
-        initConnection();
+        comprobarTablaPersonas();
 
 
     }
