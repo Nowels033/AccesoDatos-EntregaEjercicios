@@ -1,18 +1,20 @@
 package ejercicioJSON.repository;
 
+import ejercicioJSON.interfaces.Output;
+import ejercicioJSON.interfaces.SentenciasSql;
+import ejercicioJSON.model.Persona;
+
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
-public class SqlPersona {
+public class SqlPersona implements Output, SentenciasSql {
     private static String url;
     private static String user;
     private static String password;
     private static Connection conn = null ;
+
 
     public SqlPersona() {
         initSqlPersona();
@@ -51,6 +53,30 @@ public class SqlPersona {
             password = properties.getProperty("PASSWORD");
 
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void write() {
+        initConnection();
+
+
+    }
+
+    @Override
+    public void write(Persona persona) {
+        comprobarTablaPersonas();
+
+    }
+    private void comprobarTablaPersonas(){
+        initConnection();
+        try {
+            Statement statement = conn.createStatement();
+            statement.executeUpdate(SQL_COMPROBAR_TABLA);
+            statement.close();
+            closeConnection();
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
