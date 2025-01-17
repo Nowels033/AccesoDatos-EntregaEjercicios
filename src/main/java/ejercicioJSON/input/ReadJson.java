@@ -1,12 +1,18 @@
 package ejercicioJSON.input;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ejercicioJSON.exceptions.ReadJsonException;
-import ejercicioJSON.interfaces.Input;
+import ejercicioJSON.interfaces.InputJson;
+import ejercicioJSON.model.Persona;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ReadJson implements Input {
+public class ReadJson implements InputJson {
     private static final String RUTA = "src/main/java/ejercicioJSON/filesJson/";
     private String rutaCompleta;
     public ReadJson(String archivo) {
@@ -23,21 +29,37 @@ public class ReadJson implements Input {
     }
 
     @Override
-    public void read() {
-        StringBuilder contenidoJson = new StringBuilder();
+    public List<Persona> read() {
+        ObjectMapper mapper = new ObjectMapper();
+        List<Persona> personas = new ArrayList<>();
+
         try {
-            BufferedReader br = new BufferedReader(new FileReader(getRutaCompleta()));
-            String linea;
-            while ((linea=br.readLine()) != null){
-                contenidoJson.append(linea);
+            File archivoJson = new File(getRutaCompleta());
+
+
+            try {
+                Persona persona = mapper.readValue(archivoJson, Persona.class);
+                System.out.println("Persona : " + persona);
+                personas.add(persona);
+
+            } catch (JsonProcessingException e) {
+                 personas = mapper.readValue(archivoJson, new TypeReference<List<Persona>>() {});
+               // System.out.println("Lista de personas: ");
+//                for (int i = 0; i < personas.size(); i++) {
+//
+//
+//
+//                }
+
             }
-            System.out.println(contenidoJson.toString());
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+
+
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.err.println("error al leer el archivo JSON: " + e.getMessage());
         }
+        return personas;
     }
+
     public static Boolean comprobarFichero(String archivo){
         File fichero = new File(RUTA+archivo);
         return fichero.exists();
