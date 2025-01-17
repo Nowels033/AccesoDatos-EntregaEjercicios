@@ -39,7 +39,7 @@ public class ReadJson implements InputJson {
 
             try {
                 Persona persona = mapper.readValue(archivoJson, Persona.class);
-                System.out.println("Persona : " + persona);
+                //System.out.println("Persona : " + persona);
                 personas.add(persona);
 
             } catch (JsonProcessingException e) {

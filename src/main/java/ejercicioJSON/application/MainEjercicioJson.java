@@ -30,7 +30,6 @@ public class MainEjercicioJson {
 
         }while(opcion !=3);
 
-
     }
     public static void opcionesMenu(){
         System.out.println(".....MANEJO DE DATOS CON LA BBDD PERSONAS.....");
@@ -73,7 +72,6 @@ public class MainEjercicioJson {
             default:
                 System.out.println("Opcion no valida, elige una opcion del 1 al 3.");
         }
-
-
+        //es mas importante conocimiento que un CV
     }
 }
