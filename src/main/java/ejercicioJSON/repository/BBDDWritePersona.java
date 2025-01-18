@@ -8,12 +8,14 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class BBDDWritePersona extends ConnBBDDPersonas implements OutPutBBDD {
-    public BBDDWritePersona() {
+    protected static final String SQL_INSERTAR_PERSONA = "INSERT INTO personas (nombre, edad, ciudad) VALUES (?, ?, ?)";
 
+    public BBDDWritePersona() {
+        super();
     }
 
     @Override
-    public void write(List<Persona> personas) {
+    public void write(List<Persona> personas) throws RuntimeException, SQLException {
         initConnection();
         comprobarTablaPersonas();
         insertPersonas(personas,SQL_INSERTAR_PERSONA);
