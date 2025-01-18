@@ -4,6 +4,6 @@ import ejercicioJSON.model.Persona;
 
 import java.util.List;
 
-public interface InputJson {
+public interface InputInterface {
      List<Persona> read();
 }

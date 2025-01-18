@@ -5,27 +5,21 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ejercicioJSON.exceptions.ReadJsonException;
-import ejercicioJSON.interfaces.InputJson;
+import ejercicioJSON.interfaces.InputInterface;
 import ejercicioJSON.model.Persona;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadJson implements InputJson {
+public class ReadJson implements InputInterface {
+    private static File ficheroJSON;
     private static final String RUTA = "src/main/java/ejercicioJSON/filesJson/";
-    private String rutaCompleta;
-    public ReadJson(String archivo) {
-        if (!comprobarFichero(archivo)) throw new ReadJsonException("El archivo introducido no existe");
-        this.rutaCompleta= RUTA+ archivo;
-    }
+    private static String absoluteJSONPath;
+    public ReadJson(String nombreArchivo) throws ReadJsonException {
+        absoluteJSONPath = RUTA + nombreArchivo;
 
-    public String getRutaCompleta() {
-        return rutaCompleta;
-    }
-
-    public void setRutaCompleta(String rutaCompleta) {
-        this.rutaCompleta = rutaCompleta;
+        if (!comprobarFichero()) ReadJsonException.fromCheckExists();
     }
 
     @Override
@@ -34,35 +28,18 @@ public class ReadJson implements InputJson {
         List<Persona> personas = new ArrayList<>();
 
         try {
-            File archivoJson = new File(getRutaCompleta());
-
-
-            try {
-                Persona persona = mapper.readValue(archivoJson, Persona.class);
-                //System.out.println("Persona : " + persona);
-                personas.add(persona);
-
-            } catch (JsonProcessingException e) {
-                 personas = mapper.readValue(archivoJson, new TypeReference<List<Persona>>() {});
-               // System.out.println("Lista de personas: ");
-//                for (int i = 0; i < personas.size(); i++) {
-//
-//
-//
-//                }
-
-            }
-
-
+            personas = mapper.readValue(ficheroJSON, new TypeReference<>() {});
+        } catch (JsonProcessingException e) {
+            ReadJsonException.fromJsonProcessing();
         } catch (IOException e) {
-            System.err.println("error al leer el archivo JSON: " + e.getMessage());
+            ReadJsonException.fromJsonAccesing();
         }
+
         return personas;
     }
 
-    public static Boolean comprobarFichero(String archivo){
-        File fichero = new File(RUTA+archivo);
-        return fichero.exists();
-
+    public static Boolean comprobarFichero(){
+        ficheroJSON = new File(absoluteJSONPath);
+        return ficheroJSON.exists();
     }
 }

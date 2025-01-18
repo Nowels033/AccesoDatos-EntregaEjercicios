@@ -8,7 +8,7 @@ import java.util.List;
 
 public class BBDDReadPersonas extends ConnBBDDPersonas implements InPutBBDD {
     public BBDDReadPersonas() {
-
+        super();
     }
 
     @Override

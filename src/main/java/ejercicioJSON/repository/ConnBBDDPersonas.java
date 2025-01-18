@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
-public class ConnBBDDPersonas {
+abstract class ConnBBDDPersonas {
 
     protected static final String SQL_COMPROBAR_TABLA = "CREATE TABLE IF NOT EXISTS personas (" +
             "id INT AUTO_INCREMENT PRIMARY KEY, " +
@@ -13,7 +13,7 @@ public class ConnBBDDPersonas {
             "edad INT, " +
             "ciudad VARCHAR(50)" +
             ");";
-    protected static final String SQL_INSERTAR_PERSONA = "INSERT INTO personas (nombre, edad, ciudad) VALUES (?, ?, ?)";
+
 
     private static String url;
     private static String user;
@@ -25,14 +25,10 @@ public class ConnBBDDPersonas {
     }
 
 
-    public void initConnection() {
+    public void initConnection() throws SQLException {
         if (conn == null || isConnectionClosed()) {
-            try {
-                conn = DriverManager.getConnection(url, user, password);
-                System.out.println("Conexion establecida en"+url);
-            } catch (SQLException e) {
-                throw new RuntimeException("Error al establecer la conexión", e);
-            }
+            conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Conexion establecida en "+url);
         }
     }
 
@@ -40,7 +36,7 @@ public class ConnBBDDPersonas {
         try {
             return conn == null || conn.isClosed();
         } catch (SQLException e) {
-            throw new RuntimeException("Error", e);
+            throw new RuntimeException("No se pudo cerrar la conexión a la base de datos", e);
         }
     }
     public void closeConnection() {
@@ -67,7 +63,7 @@ public class ConnBBDDPersonas {
 
 
 
-    protected void comprobarTablaPersonas() {
+    protected void comprobarTablaPersonas() throws RuntimeException, SQLException {
         initConnection();
         try (Statement statement = conn.createStatement()) {
             statement.executeUpdate(SQL_COMPROBAR_TABLA);
