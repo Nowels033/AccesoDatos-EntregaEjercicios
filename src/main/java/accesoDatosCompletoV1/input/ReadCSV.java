@@ -6,7 +6,7 @@ import accesoDatosCompletoV1.validator.FileValidator;
 
 public class ReadCSV implements InPutInterface {
     private static final String ABSOLUTEPATH = "data/JSON/";
-    private static String fileAbsolutePath;
+    private  String fileAbsolutePath;
     public ReadCSV(String file) {
 
         //COMPROBAMOS QUE EL FICHERO JSON EXISTE
