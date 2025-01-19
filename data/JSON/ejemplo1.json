@@ -1,0 +1,22 @@
+[
+  {
+    "nombre": "Facundo",
+    "edad": 30,
+    "ciudad": "Madrid"
+  },
+  {
+    "nombre": "Saturnina",
+    "edad": 98,
+    "ciudad": "Barcelona"
+  },
+  {
+    "nombre": "Adoración",
+    "edad": 55,
+    "ciudad": "Sevilla"
+  },
+  {
+    "nombre": "Noel",
+    "edad": 32,
+    "ciudad": "Madrid"
+  }
+]

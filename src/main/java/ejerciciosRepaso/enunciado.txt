@@ -1,0 +1,12 @@
+1) Modificar Ecuacion2g para poder introducir los valores de los coeficientes de la ecuación por
+teclado durante la ejecución del programa.
+2) Programa que indica si un valor numérico es el cuadrado de otro valor numérico entero.
+3) Programa que indica el menor de tres valores numéricos.
+4) Programa que indica el mayor de tres valores numéricos.
+5) Programa que indica el valor central de tres valores numéricos.
+6) Programa que indica el número de días de un mes dado con un valor entero.
+7) Programa que dado el ordinal correspondiente al mes de un año, indique el número de días de ese
+mes (31, 28, 31, 30…)
+8) Programa que dados un día del mes, un mes y un año indique si la fecha es válida o no. Notas:
+debe considerarse el caso de año bisiesto y puede emplearse una sentencia switch para discernir
+entre los diferentes meses.
