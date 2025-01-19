@@ -1,13 +1,13 @@
 package accesoDatosCompletoV1.repository;
 
-import accesoDatosCompletoV1.interfaces.OutPutInterface;
+import accesoDatosCompletoV1.interfaces.OutPutInterfacePeople;
 import accesoDatosCompletoV1.models.Persona;
 
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-public class WriteBBDDJSON extends ConnectionBBDD implements OutPutInterface {
+public class WriteBBDDJSON extends ConnectionBBDD implements OutPutInterfacePeople {
 
     private static final String SQL_COMPROBAR_TABLA = "CREATE TABLE IF NOT EXISTS personas (" +
             "id INT AUTO_INCREMENT PRIMARY KEY, " +

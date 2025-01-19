@@ -3,7 +3,7 @@ package accesoDatosCompletoV1.input;
 
 
 import accesoDatosCompletoV1.exceptions.FileNotExist;
-import accesoDatosCompletoV1.interfaces.InPutInterface;
+import accesoDatosCompletoV1.interfaces.InPutInterfacePeople;
 import accesoDatosCompletoV1.models.Persona;
 import accesoDatosCompletoV1.output.MsgError;
 import accesoDatosCompletoV1.validator.FileValidator;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ReadJSON implements InPutInterface {
+public class ReadJSON implements InPutInterfacePeople {
 
     private static final String ABSOLUTEPATH = "data/JSON/";
     private static String fileAbsolutePath;
@@ -50,9 +50,5 @@ public class ReadJSON implements InPutInterface {
         return personas;
 
     }
-//    private static List<Persona> returnPersonasJson(List<Persona> personas) {
-//        return personas;
-//    }
-
 
 }
