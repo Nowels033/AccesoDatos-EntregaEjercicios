@@ -7,4 +7,7 @@ public class MsgError {
     public static String errorBBDD() {
         return "Error al acceder a la BBDD";
     }
+    public static String errorLeerJson() {
+        return "Error al procesar el archiv  .JSON";
+    }
 }

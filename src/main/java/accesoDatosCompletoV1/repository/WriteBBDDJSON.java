@@ -1,6 +1,9 @@
 package accesoDatosCompletoV1.repository;
 
 import accesoDatosCompletoV1.interfaces.OutPutInterface;
+import accesoDatosCompletoV1.models.Persona;
+
+import java.util.List;
 
 public class WriteBBDDJSON extends ConnectionBBDD implements OutPutInterface {
     public WriteBBDDJSON() {
@@ -8,8 +11,9 @@ public class WriteBBDDJSON extends ConnectionBBDD implements OutPutInterface {
     }
 
     @Override
-    public void write() {
+    public void write(List<Persona> personas) {
         initConnection();
+
         closeConnection();
     }
 }

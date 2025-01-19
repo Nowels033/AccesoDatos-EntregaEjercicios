@@ -2,7 +2,10 @@ package accesoDatosCompletoV1.input;
 
 import accesoDatosCompletoV1.exceptions.FileNotExist;
 import accesoDatosCompletoV1.interfaces.InPutInterface;
+import accesoDatosCompletoV1.models.Persona;
 import accesoDatosCompletoV1.validator.FileValidator;
+
+import java.util.List;
 
 public class ReadCSV implements InPutInterface {
     private static final String ABSOLUTEPATH = "data/JSON/";
@@ -18,7 +21,7 @@ public class ReadCSV implements InPutInterface {
     }
 
     @Override
-    public void read() {
-
+    public List<Persona> read() {
+        return null;
     }
 }
