@@ -16,7 +16,7 @@ public abstract class ConnectionBBDD {
     private static String url;
     private static String user;
     private static String password;
-    private static Connection conn = null;
+    protected static Connection conn = null;
 
 
     public ConnectionBBDD() {

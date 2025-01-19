@@ -10,12 +10,13 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-//        OutPutInterface output = new WriteBBDDJSON();
-//        output.write();
 
-        InPutInterface input = new ReadJSON("ejemplo1.json");
-       List<Persona> personas = input.read();
 
-       personas.forEach(System.out::println);
+       InPutInterface input = new ReadJSON("ejemplo1.json");
+        OutPutInterface output = new WriteBBDDJSON();
+        output.write(input.read());
+
+
+
     }
 }
