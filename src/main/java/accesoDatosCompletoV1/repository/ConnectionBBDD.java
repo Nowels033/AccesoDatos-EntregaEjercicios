@@ -1,5 +1,7 @@
 package accesoDatosCompletoV1.repository;
 
+import accesoDatosCompletoV1.exceptions.ExceptionBBDD;
+import accesoDatosCompletoV1.exceptions.ExceptionProperties;
 import accesoDatosCompletoV1.output.MsgError;
 import accesoDatosCompletoV1.output.MsgUser;
 
@@ -27,8 +29,8 @@ public abstract class ConnectionBBDD {
             try {
                 conn = DriverManager.getConnection(url, user, password);
                 System.out.println(MsgUser.msgConection() +url);
-            } catch (SQLException e) {
-                throw new RuntimeException(MsgError.errorBBDD(),e);
+            } catch (SQLException | ExceptionBBDD e) {
+                ExceptionBBDD.connectionFail();
             }
 
         }
@@ -37,8 +39,10 @@ public abstract class ConnectionBBDD {
     public static boolean isConnectionClosed() {
         try {
             return conn == null || conn.isClosed();
-        } catch (SQLException e) {
-            throw new RuntimeException(MsgError.errorBBDD());
+        } catch (SQLException| ExceptionBBDD e) {
+            ExceptionBBDD.closeConnectionFail();
+            return false;
+            //throw new RuntimeException(MsgError.errorBBDD(),e);
         }
     }
 
@@ -47,8 +51,9 @@ public abstract class ConnectionBBDD {
             try {
                 conn.close();
                 System.out.println(MsgUser.msgCloseConection());
-            } catch (SQLException e) {
-                throw new RuntimeException(MsgError.errorPropierties());
+            } catch (SQLException| ExceptionBBDD e) {
+                ExceptionBBDD.closeConnectionFail();
+                //throw new RuntimeException(MsgError.errorBBDD(),e);
             }
         }
     }
@@ -56,13 +61,14 @@ public abstract class ConnectionBBDD {
     public static void initProperties() {
 
         Properties properties = new Properties();
-        try (FileInputStream fis = new FileInputStream(PROPERTIESHOUSE)) {
+        try (FileInputStream fis = new FileInputStream(PROPERTIESOUTHOUSE)) {
             properties.load(fis);
             url = properties.getProperty("URL");
             user = properties.getProperty("USER");
             password = properties.getProperty("PASSWORD");
-        } catch (IOException e) {
-            throw new RuntimeException(MsgError.errorPropierties());
+        } catch (IOException | ExceptionProperties e) {
+            ExceptionProperties.failProperties();
+            throw new RuntimeException(e);
         }
 
 
