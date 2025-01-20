@@ -2,7 +2,6 @@ package accesoDatosCompletoV1.repository;
 
 import accesoDatosCompletoV1.exceptions.ExceptionBBDD;
 import accesoDatosCompletoV1.exceptions.ExceptionProperties;
-import accesoDatosCompletoV1.output.MsgError;
 import accesoDatosCompletoV1.output.MsgUser;
 
 import java.io.FileInputStream;
@@ -13,8 +12,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public abstract class ConnectionBBDD {
-    private static final String PROPERTIESHOUSE = "configuration/SqlCasa.properties";
-    private static final String PROPERTIESOUTHOUSE = "configuration/SqlClase.properties";
+    private static final String PROPERTIES_HOUSE = "configuration/SqlCasa.properties";
+    private static final String PROPERTIES_OUT_HOUSE = "configuration/SqlClase.properties";
     private static String url;
     private static String user;
     private static String password;
@@ -61,7 +60,7 @@ public abstract class ConnectionBBDD {
     public static void initProperties() {
 
         Properties properties = new Properties();
-        try (FileInputStream fis = new FileInputStream(PROPERTIESOUTHOUSE)) {
+        try (FileInputStream fis = new FileInputStream(PROPERTIES_OUT_HOUSE)) {
             properties.load(fis);
             url = properties.getProperty("URL");
             user = properties.getProperty("USER");
