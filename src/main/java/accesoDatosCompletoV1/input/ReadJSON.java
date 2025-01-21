@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ReadJSON implements InPutInterfacePeople {
 
-    private static final String ABSOLUTEPATH = "data/JSON/";
+    public static final String ABSOLUTE_PATH = "data/JSON/";
     private static String fileAbsolutePath;
     private static File ficheroJSON;
     public ReadJSON(String file) {
@@ -28,7 +28,7 @@ public class ReadJSON implements InPutInterfacePeople {
         if (!FileValidator.fileExistsJSON(file)) FileNotExist.fileNotExist();
 
         //SI EXISTE, GUARDAMOS LA RUTA DEL FICHERO Y CREAMOS EL OBJETO
-       fileAbsolutePath = ABSOLUTEPATH + file;
+       fileAbsolutePath = ABSOLUTE_PATH + file;
        ficheroJSON = new File(fileAbsolutePath);
 
     }

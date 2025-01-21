@@ -1,16 +1,18 @@
 package accesoDatosCompletoV1.validator;
 
+import accesoDatosCompletoV1.input.ReadCSV;
+import accesoDatosCompletoV1.input.ReadJSON;
+
 import java.io.File;
 
 public class FileValidator {
-    private static final String ABSOLUTE_JSON_PATH = "data/JSON/";
-    private static final String ABSOLUTE_CSV_PATH = "data/CSV/";
+
     public static boolean fileExistsJSON(String stringFile) {
-        File file =new File(ABSOLUTE_JSON_PATH+stringFile);
+        File file =new File(ReadJSON.ABSOLUTE_PATH +stringFile);
         return file.exists();
     }
     public static boolean fileExistsCSV(String stringFile) {
-        File file =new File(ABSOLUTE_CSV_PATH+stringFile);
+        File file =new File(ReadCSV.ABSOLUTE_PATH +stringFile);
         return file.exists();
     }
 }
