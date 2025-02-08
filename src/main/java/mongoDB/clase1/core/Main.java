@@ -24,8 +24,8 @@ public class Main {
 
     static String cadenaConexion = "mongodb://%s:%s@%s:%d";
 
-    static String miConexionLocal = String.format(cadenaConexion, "noel", "noel", "localhost", 27017);
-
+    //static String miConexionLocal = String.format(cadenaConexion, "noel", "noel", "localhost", 27017);
+    static String miConexionLocal = String.format(cadenaConexion, "admin", "admin", "localhost", 27017);
 
     public static void main(String[] args) {
 
